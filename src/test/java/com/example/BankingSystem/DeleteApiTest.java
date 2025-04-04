@@ -14,20 +14,22 @@ public class DeleteApiTest {
         Response response =
         RestAssured
                 .given()
-                    .baseUri("http://localhost:8080/api/deleteAccount/5/123411166")
-                    .contentType(ContentType.JSON)
+                .baseUri("http://localhost:8082")
+                .basePath("/api/deleteAccount")
+                .contentType(ContentType.JSON)
+                .queryParam("customerId", 1)
+                .queryParam("accountNumber", 123222166L)
                 .when()
-                    .delete()
+                .delete()
                 .then()
-                    .assertThat()
                 .log().all()
-                    .statusCode(200)
-//                    .header("Content-type", "application/json")
+                .assertThat()
+                .statusCode(200)
                 .extract()
-                    .response();
+                .response();
 
-        System.out.println("Status Code :" + response.getStatusCode());
-        System.out.println("Response :" + response.getBody().asString());
+        System.out.println("Status Code: " + response.getStatusCode());
+        System.out.println("Response: " + response.getBody().asString());
 
     }
 }

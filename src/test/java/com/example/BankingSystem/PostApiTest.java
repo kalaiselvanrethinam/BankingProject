@@ -13,32 +13,34 @@ public class PostApiTest {
 
     @Test
     public void testCreateAccount() throws JSONException {
-        RestAssured.baseURI = "http://localhost:8080/api/createAccount";
+        RestAssured.baseURI = "http://localhost:8082";
+
         String requestBody = """
-                {
-                    "accountNumber": "3214567888",
-                    "accountType": "Savings",
-                    "balance": 15000.0,
-                    "status": "Active",
-                    "customerId": 1
-                }
-                """;
-        Response response =
-        RestAssured
+            {
+                "accountType": "Savings",
+                "balance": 15000.0,
+                "status": "Active",
+                "customerId": 1
+            }
+            """;
+
+        Response response = RestAssured
                 .given()
-                    .contentType(ContentType.JSON).body(requestBody).log().body()
+                .contentType(ContentType.JSON)
+                .body(requestBody)
+                .log().body()
                 .when()
-                    .post()
+                .post("/api/createAccount/1")
                 .then()
-                    .assertThat().log().all().statusCode(201)
-                    .body("accountNumber", equalTo("3214567888"))
-                    .body("accountType", equalTo("Savings"))
-                    .body("balance", equalTo(15000.0F))
-                    .body("status", equalTo("Active"))
-                    .body("customerId", equalTo(1))
+                .log().all()
+                .assertThat()
+                .statusCode(201)
+                .body("accountType", equalTo("Savings"))
+                .body("balance", equalTo(15000.0F)) // or 15000.0F
+                .body("status", equalTo("Active"))
+                .body("customerId", equalTo(1))
                 .extract().response();
 
-        System.out.println("Response" + response.getBody().asString());
-
+        System.out.println("Response: " + response.getBody().asString());
     }
 }

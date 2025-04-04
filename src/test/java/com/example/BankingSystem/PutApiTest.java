@@ -13,7 +13,7 @@ public class PutApiTest {
     public void testDeposit(){
         Response response = RestAssured
                 .given()
-                    .baseUri("http://localhost:8080/api/deposit/1/1234567890")
+                    .baseUri("http://localhost:8082/api/deposit/1/1234567890")
                     .contentType(ContentType.JSON)
                 .param("amount", 1000)
                 .when()
@@ -38,9 +38,11 @@ public class PutApiTest {
         RestAssured
                 .given()
                     .contentType(ContentType.JSON)
-                    .baseUri("http://localhost:8080/api/withdraw/1/1234567890")
+                    .baseUri("http://localhost:8082/api/withdraw")
                     .body("""
                             {
+                                "customerId : 1",
+                                "accountNumber : 1234567890"
                                 "amount": 1000
                             }
                             """)

@@ -18,7 +18,7 @@ public class GetApiTest {
         RestAssured
                 .given()
                     .contentType(ContentType.JSON)
-                    .baseUri("http://localhost:8080/api/getAllAccounts")
+                    .baseUri("http://localhost:8082/api/getAllAccounts")
                 .when()
                     .get()
                 .then()
@@ -44,7 +44,7 @@ public class GetApiTest {
         RestAssured
                 .given()
                     .contentType(ContentType.JSON)
-                    .baseUri("http://localhost:8080/api/getAccountsByCustomerId/5")
+                    .baseUri("http://localhost:8082/api/getAccountsByCustomerId/5")
 //                    .log().all()
                 .when()
                     .get()
