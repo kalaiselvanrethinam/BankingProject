@@ -18,7 +18,7 @@ public class DeleteApiTest {
                 .basePath("/api/deleteAccount")
                 .contentType(ContentType.JSON)
                 .queryParam("customerId", 1)
-                .queryParam("accountNumber", 123222166L)
+                .queryParam("accountNumber", 4670009138L)
                 .when()
                 .delete()
                 .then()

@@ -35,28 +35,25 @@ public class PutApiTest {
     public void testWithdraw(){
 
         Response response =
-        RestAssured
-                .given()
-                    .contentType(ContentType.JSON)
-                    .baseUri("http://localhost:8082/api/withdraw")
-                    .body("""
-                            {
-                                "customerId : 1",
-                                "accountNumber : 1234567890"
-                                "amount": 1000
-                            }
-                            """)
-                .when()
-                    .put()
-                .then()
-                    .assertThat()
-                    .statusCode(200)
-                    .header("Content-Type","application/json")
-                .extract()
-                    .response();
+                RestAssured
+                        .given()
+                        .contentType(ContentType.JSON)
+                        .baseUri("http://localhost:8082/api/withdraw")
+                        .queryParam("customerId", 1)
+                        .queryParam("accountNumber", 1234567890)
+                        .queryParam("amount", 1000)
+                        .when()
+                        .put()
+                        .then()
+                        .assertThat()
+                        .statusCode(200)
+                        .header("Content-Type", "application/json")
+                        .extract()
+                        .response();
 
-        System.out.println("Status Code " + response.getStatusCode());
-        System.out.println("Response " + response.getBody().asPrettyString());
+        System.out.println("Status Code: " + response.getStatusCode());
+        System.out.println("Response: " + response.getBody().asPrettyString());
+
 
     }
 }
